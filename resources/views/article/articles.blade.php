@@ -4,7 +4,7 @@
 
 @if (session() -> has('message'))
 <div class='alert alert-success' role='alert'>
-    {{section('message')}}
+    {{session('message')}}
 </div>
 @endif
 

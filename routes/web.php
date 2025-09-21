@@ -16,11 +16,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
 
 Route::get('/', [MainController::class, 'index']);
 Route::get('/full_image/{img}', [MainController::class, 'show']);
 
 Route::resource('/article', ArticleController::class);
+
+Route::post('{article}/save_comment/', [CommentController::class, 'store']);
 
 Route::get('/auth/signin', [AuthController::class, 'signIn']);
 Route::get('/auth/register', [AuthController::class, 'register']);

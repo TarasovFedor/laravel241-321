@@ -22,4 +22,8 @@
         </div>
     </div>
 </div>
+
+<div class='comments'>
+    @include('comment/comments', ['comments' => $article -> comments])
+</div>
 @endsection

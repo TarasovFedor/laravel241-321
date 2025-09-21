@@ -43,7 +43,7 @@
                 <li class="nav-item">
                 <a class="nav-link" href="/contacts">Contacts</a>
                 </li>
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
                 </a>
@@ -53,7 +53,7 @@
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
-                </li>
+                </li> -->
             </ul>
             <form class="d-flex" role="search">
                 <a href='/auth/signin' class="btn btn-outline-success" type="submit">Sign in</a>
@@ -68,6 +68,4 @@
         </div>
     </main>
     </body>
-
-
 </html>

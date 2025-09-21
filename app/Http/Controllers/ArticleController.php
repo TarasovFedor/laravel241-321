@@ -45,7 +45,7 @@ class ArticleController extends Controller
         
         $article -> save();
 
-        return redirect() -> route('articles/index') -> with('message', 'Create successful');
+        return redirect() -> route('article.index') -> with('message', 'Create successful');
     }
 
     /**
@@ -81,7 +81,7 @@ class ArticleController extends Controller
         $article -> users_id = 1;
         $article -> save();
 
-        return redirect() -> route('article/show', ['article' => $article -> id]) -> with('message', 'Update successful');
+        return redirect() -> route('article.show', ['article' => $article -> id]) -> with('message', 'Update successful');
     }
 
     /**
@@ -91,6 +91,10 @@ class ArticleController extends Controller
     {
         $article -> delete();
 
-        return redirect() -> route('article/index') -> with('message', 'Delete successful');
+        return redirect() -> route('article.index') -> with('message', 'Delete successful');
+    }
+
+    public function save_comment(Request $request) {
+        CommentController::store($request);
     }
 }
