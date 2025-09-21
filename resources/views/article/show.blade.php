@@ -24,6 +24,6 @@
 </div>
 
 <div class='comments'>
-    @include('comment/comments', ['comments' => $article -> comments])
+    @include('comment.comments', ['comments' => $article -> comments, 'article' => $article])
 </div>
 @endsection

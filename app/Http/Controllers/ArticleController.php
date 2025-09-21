@@ -95,6 +95,6 @@ class ArticleController extends Controller
     }
 
     public function save_comment(Request $request) {
-        CommentController::store($request);
+        // CommentController::store($request);
     }
 }
