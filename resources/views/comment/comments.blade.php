@@ -13,7 +13,11 @@
 @else
     <ul>
         @foreach($comments as $comment)
-            <li>{{$comment -> text}}</li>
+          <div class="card mb-3">
+            <div class="card-body">
+              <li class="card-text">{{$comment -> text}}</li>
+            </div>
+          </div>
         @endforeach
     </ul>
 @endif
