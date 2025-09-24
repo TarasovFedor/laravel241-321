@@ -6,7 +6,7 @@
         <li class="list-group-item list-group-item-danger">{{$error}}</li>
     @endforeach
   </ul>
-<form action="/auth/registr" method="POST">
+<form action="/auth/register" method="POST">
   @CSRF
   <div class="mb-3">
     <label for="Name" class="form-label">Your name</label>

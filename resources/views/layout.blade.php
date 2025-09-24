@@ -55,9 +55,13 @@
                 </ul>
                 </li> -->
             </ul>
-            <form class="d-flex" role="search">
-                <a href='/auth/signin' class="btn btn-outline-success" type="submit">Sign in</a>
-            </form>
+            @guest
+                <a href="/auth/signin" class="btn btn-outline-success mr-5">Sign In</a>
+                <a href="/auth/login" class="btn btn-outline-success">Log in</a>
+            @endguest
+            @auth
+                <a href="/auth/logout" class="btn btn-outline-success">Sign Out</a>
+            @endauth
             </div>
         </div>
         </nav>
