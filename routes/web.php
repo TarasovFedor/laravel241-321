@@ -24,6 +24,9 @@ Route::get('/full_image/{img}', [MainController::class, 'show']);
 Route::resource('/article', ArticleController::class);
 
 Route::post('save_comment/{article}', [CommentController::class, 'store']) -> name('save_comment');
+Route::delete('article/{article}/{comment}', [CommentController::class, 'destroy']) -> name('comment.destroy');
+Route::get('article/{article}/{comment}/edit', [CommentController::class, 'edit']) -> name('comment.edit');
+Route::put('article/{article}/{comment}', [CommentController::class, 'update']) -> name('comment.update');
 
 Route::get('/auth/signin', [AuthController::class, 'signIn']);
 Route::post('/auth/register', [AuthController::class, 'register']);

@@ -16,6 +16,13 @@
           <div class="card mb-3">
             <div class="card-body">
               <li class="card-text">{{$comment -> text}}</li>
+              <br>
+              <a href="{{route('comment.edit', ['article' => $article -> id, 'comment' => $comment -> id])}}" class="btn btn-primary me-3">Edit comment</a>
+              <form action="{{route('comment.destroy', ['article' => $article -> id, 'comment' => $comment -> id])}}" method="post">
+                @METHOD("DELETE")
+                @CSRF
+                <button type="submit" class="btn btn-warning me-3">Delete comment</button>
+              </form>
             </div>
           </div>
         @endforeach

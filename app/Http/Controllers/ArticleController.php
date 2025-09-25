@@ -41,7 +41,7 @@ class ArticleController extends Controller
         $article -> publish_date = $request -> date;
         $article -> title = request('title');
         $article -> text = $request -> text;
-        $article -> users_id = 1;
+        $article -> users_id = auth() -> id();;
         
         $article -> save();
 
