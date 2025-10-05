@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use App\Mail\CommentMail;
+use Illuminate\Support\Facades\Mail;
 
 class CommentController extends Controller
 {
@@ -20,7 +22,9 @@ class CommentController extends Controller
         $comment -> article_id = $article -> id;
         $comment -> user_id = auth() -> id();
         
-        $comment -> save();
+        if ($comment -> save()) {
+            Mail::to('fedor.tarasov.2007@mail.ru') -> send(new CommentMail($comment, $article -> id));
+        };
 
         return redirect() -> back();
     }

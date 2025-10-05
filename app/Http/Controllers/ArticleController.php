@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ArticleController extends Controller
 {
@@ -22,6 +24,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        Gate::authorize('create', Article::class);
         return view('article/create');
     }
 
@@ -30,6 +33,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        Gate::authorize('create', Article::class);
         $request -> validate([
             'date' => 'required | date',
             'title' => 'required | min:10',
@@ -61,6 +65,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
+        Gate::authorize('restore', $article);
         return view('article/edit', ['article' => $article]);
     }
 
@@ -69,6 +74,7 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
+        Gate::authorize('update', $article);
         $request -> validate([
             'date' => 'required|date',
             'title' => 'required|min:10',
@@ -89,12 +95,14 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        Gate::authorize('delete', $article);
+        
         $article -> delete();
 
         return redirect() -> route('article.index') -> with('message', 'Delete successful');
     }
 
-    public function save_comment(Request $request) {
-        // CommentController::store($request);
-    }
+    // public function save_comment(Request $request) {
+    //     // CommentController::store($request);
+    // }
 }

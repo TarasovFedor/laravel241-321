@@ -47,7 +47,7 @@ class AuthController extends Controller
         }
 
         return back() -> withErrors([
-            'email' => 'Полученный email не был найден.',
+            'email' => 'Полученные данные не были найдены.',
         ]) -> onlyInput('email');
     }
 
