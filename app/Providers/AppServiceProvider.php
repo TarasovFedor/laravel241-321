@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Blade;
 use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Auth\Access\Response;
@@ -24,18 +25,23 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::useBootstrap();
 
-        Gate::before(function (User $user) {
-            if ($user -> role == 'moderator') {
+        Blade::directive('active', function($url){
+            return "<?php echo request()->is($url) ? 'active' : '';?>";
+        });
+
+        Paginator::useBootstrapFive();
+        Paginator::useBootstrapFour();
+
+        Gate::before(function(User $user){
+            if ($user -> role == "moderator")
                 return true;
-            }
         });
 
         Gate::define('comment', function(User $user, Comment $comment){
-            return ($user->id == $comment->user_id) 
+            return ($user -> id == $comment -> user_id) 
             ? Response::allow()
-            : Response::deny('You are not allowed to do that.');
+            : Response::deny("You aren't allowed to do that.");
         });
     }
 }

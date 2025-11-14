@@ -7,20 +7,18 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
-use App\Models\Comment;
-use App\Models\Article;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\support\Facades\Log;
+use Illuminate\Mail\Mailables\Address;
 
-class CommentMail extends Mailable
+
+class StatMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     /**
      * Create a new message instance.
      */
-    public function __construct(public Comment $comment, public Article $article, public $author)
+    public function __construct(public $countComment, public $articles)
     {
         //
     }
@@ -30,7 +28,6 @@ class CommentMail extends Mailable
      */
     public function envelope(): Envelope
     {
-        // Log::alert(env("MAIL_FROM_ADDRESS"));
         return new Envelope(
             from: new Address(env("MAIL_FROM_ADDRESS"), 'fedor'),
             subject: 'CommentMail',
@@ -43,11 +40,10 @@ class CommentMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'mail.comment',
+            markdown: 'mail.stat',
             with:[
-                'comment'=>$this->comment,
-                'article_title'=>$this->article->title,
-                'author'=>$this->author,
+                'countComment'=>$this->countComment,
+                'countArticle' => $this->articles
             ]
         );
     }

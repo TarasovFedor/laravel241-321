@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
 use App\Jobs\VeryLongJob;
 use App\Notifications\NewCommentNotify;
+use App\Http\Controllers\Controller;
+
 
 
 
@@ -22,7 +24,7 @@ class CommentController extends Controller
         $comments = Cache::rememberForever('comments_'.$page, function(){
         return Comment::latest()->paginate(10);
         });
-        return view('comment.index', ['comments'=>$comments]);
+        return response()->json($comments);
     }
 
     public function store(Request $request){
@@ -42,7 +44,7 @@ class CommentController extends Controller
                 Cache::forget($param->key);
             }
         }
-        return redirect()->route('article.show', $request->article_id)->with('message', "Comment add succesful and enter for moderation");
+        return response("Comment add succesful and enter for moderation");
     }
 
     public function edit(Comment $comment){
@@ -76,12 +78,13 @@ class CommentController extends Controller
             Notification::send($users, new NewCommentNotify($article->title, $article->id));
             Cache::flush();
         }
-        return redirect()->route('comment.index');
+        return response($comment->accept);
     }
 
     public function reject(Comment $comment){
         $comment->accept = false;
         $comment->save();
-        return redirect()->route('comment.index');
+        return response($comment->accept);
+
     }
 }

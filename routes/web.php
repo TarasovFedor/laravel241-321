@@ -21,26 +21,32 @@ use App\Http\Controllers\CommentController;
 Route::get('/', [MainController::class, 'index']);
 Route::get('/full_image/{img}', [MainController::class, 'show']);
 
-Route::resource('/article', ArticleController::class);
+Route::resource('/article', ArticleController::class)->middleware('auth:sanctum');
+Route::get('/article/{article}', [ArticleController::class, 'show'])->name('article.show')->middleware('stat', 'auth:sanctum');
 
-Route::post('save_comment/{article}', [CommentController::class, 'store']) -> name('save_comment');
-Route::delete('article/{article}/{comment}', [CommentController::class, 'destroy']) -> name('comment.destroy');
-Route::get('article/{article}/{comment}/edit', [CommentController::class, 'edit']) -> name('comment.edit');
-Route::put('article/{article}/{comment}', [CommentController::class, 'update']) -> name('comment.update');
-
-Route::get('/auth/signin', [AuthController::class, 'signIn']);
+//Auth
+Route::get('/auth/signin', [AuthController::class, 'signin']);
 Route::post('/auth/register', [AuthController::class, 'register']);
-Route::get('auth/login/', [AuthController::class, 'login']) -> name('login');
-Route::post('auth/authenticate', [AuthController::class, 'authenticate']);
-Route::get('auth/logout/', [AuthController::class, 'logout']) -> name('logout');
+Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/authenticate', [AuthController::class, 'authenticate']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
 
+//Main
+Route::get('/', [MainController::class, 'index']);
+Route::get('/full_image/{img}', [MainController::class, 'show']);
 
-Route::get('/main', function() {
-    return view('layout');
+Route::get('/about', function(){
+    return view('main.about');
 });
 
-Route::get('/about', function() {
-    return view('main/about');
+Route::controller(CommentController::class)->prefix('comment')->group(function(){
+    Route::get('/', 'index')->name('comment.index');
+    Route::post('/', 'store');
+    Route::get('/edit/{comment}', 'edit');
+    Route::post('/update/{comment}', 'update');
+    Route::get('/delete/{comment}', 'delete');
+    Route::get('/accept/{comment}', 'accept');
+    Route::get('/reject/{comment}', 'reject');
 });
 
 Route::get('/contacts', function(){
