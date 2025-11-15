@@ -3,11 +3,10 @@
 @section('content')
     <div class="card" style="width: 18rem;">
     <div class="card-body">
-        <h5 class="card-title">{{$contact['name']}}</h5>
-        <h6 class="card-subtitle mb-2 text-body-secondary">{{$contact['address']}}</h6>
-        <p class="card-text">{{$contact['phone']}}</p>
-        <a href="#" class="card-link">{{$contact['email']}}</a>
-        <!-- <a href="#" class="card-link">Another link</a> -->
+        <h5 class="card-title">{{$contacts['name']}}</h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary">{{$contacts['address']}}</h6>
+        <p class="card-text">{{$contacts['phone']}}</p>
+        <a href="#" class="card-link">{{$contacts['email']}}</a>
     </div>
     </div>
 @endsection

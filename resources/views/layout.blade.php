@@ -41,7 +41,7 @@
           <a class="nav-link @active('about')" aria-current="page" href="/about">About</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link @active('contact')" href="/contact">Contacts</a>
+          <a class="nav-link @active('contact')" href="/contacts">Contacts</a>
         </li>
         @auth
         <li class="nav-item dropdown">

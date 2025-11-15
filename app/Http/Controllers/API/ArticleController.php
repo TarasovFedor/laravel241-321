@@ -51,7 +51,7 @@ class ArticleController extends Controller
             'text' => 'max:100'
         ]);
         $article = new Article;
-        $article->date_public = $request->date;
+        $article->publish_date = $request->date;
         $article->title = request('title');
         $article->text = $request->text;
         $article->users_id = auth()->id();
@@ -96,7 +96,7 @@ class ArticleController extends Controller
             'title' => 'required|min:10',
             'text' => 'max:100'
         ]);
-        $article->date_public = $request->date;
+        $article->publish_date = $request->date;
         $article->title = request('title');
         $article->text = $request->text;
         $article->users_id = 1;

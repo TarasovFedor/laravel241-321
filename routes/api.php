@@ -41,3 +41,14 @@ Route::get('/auth/logout', [AuthController::class, 'logout'])->middleware('auth:
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/contacts', function(){
+    $array = [
+        'name' => 'MosPolytech',
+        'address' => 'Bolshaya Semenovskaya',
+        'email' => 'q@mospoly.ru',
+        'phone' => '+7 (910) 950 13-28',
+    ];
+
+    return view('main/contacts', ['contacts' => $array]);
+});

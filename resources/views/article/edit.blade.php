@@ -11,7 +11,7 @@
   @METHOD('PUT')
   <div class="mb-3">
     <label for="date" class="form-label">Publication date</label>
-    <input type="date" class="form-control" id="date" name="date" value="{{$article->date_public}}">
+    <input type="date" class="form-control" id="date" name="date" value="{{$article->publish_date}}">
   </div>
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>

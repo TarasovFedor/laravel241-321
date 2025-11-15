@@ -57,5 +57,5 @@ Route::get('/contacts', function(){
         'phone' => '+7 (910) 950 13-28',
     ];
 
-    return view('main/contacts', ['contact' => $array]);
+    return view('main/contacts', ['contacts' => $array]);
 });
